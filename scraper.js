@@ -97,8 +97,10 @@ app.get('/api/download', async (req, res) => {
 });
 
 
-const port = process.env.PORT || 3000;  // Vercel provides the PORT environment variable
-app.listen(port, () => {
-    const env = process.env.VERCEL_URL || `http://localhost:${port}`;
-    console.log(`Server running at: ${env}`);
-});
+const port = process.env.PORT || 4000;  // Vercel provides the PORT environment variable
+module.exports = app;
+
+// app.listen(port, () => {
+//     const env = process.env.VERCEL_URL || `http://localhost:${port}`;
+//     console.log(`Server running at: ${env}`);
+// });
