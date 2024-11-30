@@ -3,6 +3,7 @@ const info = require("./endpoints/info");
 const popular = require("./endpoints/popular");
 const watch = require("./endpoints/watch");
 const download = require("./endpoints/download");
+const tags = require("./endpoints/tags");
 
 const express = require('express');
 const app = express();
@@ -101,6 +102,24 @@ app.get('/api/download', async (req, res) => {
             console.error('Error occurred while loading episode:', error);
         });
 });
+
+app.get('/api/tags', async (req, res) => {
+    const query = req.query.query;
+
+    if (!query) {
+        return res.status(400).json({ error: 'Query parameter is required' });
+    }
+
+    tags(query)
+        .then((results) => {
+            res.json(results)
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'Error occurred while loading tags' });
+            console.error('Error occurred while loading tags:', error);
+        });
+});
+
 
 
 const port = process.env.PORT || 3000;  // Vercel provides the PORT environment variable
