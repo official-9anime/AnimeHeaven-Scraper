@@ -19,10 +19,12 @@ app.get('', async (req, res) => {
                                     search: "To search for an anime, use the /api/search endpoint, and make sure to add a ?query= at the end",
                                     info: "Once you have an id, use the /api/info endpoint, and pass the id through the ?query= parameter",
                                     watch: "With the info endpoint, you can get the episode ids. These are in order from oldest (episode 1) to newest. Simply use /api/watch and add the ?query= parameter to fetch a link to watch the stream directly",
-                                    download: "If you would rather download the episode, simple use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link"
+                                    download: "If you would rather download the episode, simply use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link",
+                                    tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\""
      });
 });
 
+//Popular endpoint
 app.get('/api/popular', async (req, res) => {
     // Your web scraping logic goes here
     await popular()
@@ -35,6 +37,7 @@ app.get('/api/popular', async (req, res) => {
         });
 });
 
+//Info endpoint
 app.get('/api/info', async (req, res) => {
     const query = req.query.query;
 
@@ -52,6 +55,7 @@ app.get('/api/info', async (req, res) => {
         });
 });
 
+//Search endpoint
 app.get('/api/search', async (req, res) => {
     const query = req.query.query;
 
@@ -69,6 +73,7 @@ app.get('/api/search', async (req, res) => {
         });
 });
 
+//Watch endpoint
 app.get('/api/watch', async (req, res) => {
     const query = req.query.query;
 
@@ -86,6 +91,7 @@ app.get('/api/watch', async (req, res) => {
         });
 });
 
+//Download endpoint
 app.get('/api/download', async (req, res) => {
     const query = req.query.query;
 
@@ -103,6 +109,7 @@ app.get('/api/download', async (req, res) => {
         });
 });
 
+//Tags endpoint
 app.get('/api/tags', async (req, res) => {
     const query = req.query.query;
 
