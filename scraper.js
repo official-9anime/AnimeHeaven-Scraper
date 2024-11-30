@@ -10,7 +10,7 @@ const app = express();
 //JJK
 //const query = 'ot32w';
 //Dandadan
-const query = 'j2np5';
+//const query = 'j2np5';
 
 app.get('', async (req, res) => {
     return res.status(400).json({ welcome: 'Docs coming soon :)' });
