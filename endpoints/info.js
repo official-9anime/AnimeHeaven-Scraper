@@ -84,6 +84,7 @@ async function Info(id) {
 
         // Combine data into an object
         const data = {
+            id: id || null,
             banner: banner || null,
             poster: poster || null,
             title: name || null,
