@@ -13,7 +13,13 @@ const app = express();
 //const query = 'j2np5';
 
 app.get('', async (req, res) => {
-    return res.status(400).json({ welcome: 'Docs coming soon :)' });
+    return res.status(200).json({   welcome: 'Here are some really basic docs! :)',
+                                    popular: "To get the popular current animes, use the endpoint /api/popular, no parameters necessary",
+                                    search: "To search for an anime, use the /api/search endpoint, and make sure to add a ?query= at the end",
+                                    info: "Once you have an id, use the /api/info endpoint, and pass the id through the ?query= parameter",
+                                    watch: "With the info endpoint, you can get the episode ids. These are in order from oldest (episode 1) to newest. Simply use /api/watch and add the ?query= parameter to fetch a link to watch the stream directly",
+                                    download: "If you would rather download the episode, simple use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link"
+     });
 });
 
 app.get('/api/popular', async (req, res) => {
@@ -97,7 +103,7 @@ app.get('/api/download', async (req, res) => {
 });
 
 
-const port = process.env.PORT || 4000;  // Vercel provides the PORT environment variable
+const port = process.env.PORT || 3000;  // Vercel provides the PORT environment variable
 module.exports = app;
 
 // app.listen(port, () => {
