@@ -19,12 +19,14 @@ async function recent() {
             const animeName = $(element).find('.charttitle.c a').text().trim();
             const releaseStatus = $(element).find('.charttimer.c2').text().trim();
             const episodeNumber = $(element).find('.chartep.c2').text().trim(); // Get the episode number
+            const japaneseTitle = $(element).find('.charttitlejp.c').text().trim() || null; // Get the Japanese title (if available)
 
             // Store the extracted data
             if (animeId && animeName) {
                 data.push({
                     id: animeId,
                     name: animeName,
+                    japaneseTitle: japaneseTitle, // Add Japanese title if available
                     releaseStatus: releaseStatus || 'Status unknown', // Handle empty status
                     episodeNumber: episodeNumber || 'N/A', // Handle empty or missing episode number
                 });
