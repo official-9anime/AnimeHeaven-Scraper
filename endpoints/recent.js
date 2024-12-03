@@ -27,7 +27,7 @@ async function recent() {
                 data.push({
                     id: animeId,
                     name: animeName,
-                    japaneseTitle: japaneseTitle, // Add Japanese title if available
+                    japaneseTitle: finalJapaneseTitle,
                     releaseStatus: releaseStatus || 'Status unknown', // Handle empty status
                     episodeNumber: episodeNumber || 'N/A', // Handle empty or missing episode number
                 });
