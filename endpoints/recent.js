@@ -18,6 +18,7 @@ async function recent() {
             const animeId = $(element).find('.chartimg a').attr('href')?.replace('anime.php?', '');
             const animeName = $(element).find('.charttitle.c a').text().trim();
             const releaseStatus = $(element).find('.charttimer.c2').text().trim();
+            const episodeNumber = $(element).find('.chartep.c2').text().trim(); // Get the episode number
 
             // Store the extracted data
             if (animeId && animeName) {
@@ -25,6 +26,7 @@ async function recent() {
                     id: animeId,
                     name: animeName,
                     releaseStatus: releaseStatus || 'Status unknown', // Handle empty status
+                    episodeNumber: episodeNumber || 'N/A', // Handle empty or missing episode number
                 });
             }
         });
