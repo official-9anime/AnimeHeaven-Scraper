@@ -4,6 +4,7 @@ const popular = require("./endpoints/popular");
 const watch = require("./endpoints/watch");
 const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
+const recent = require("./endpoints/recent");  // Import the recent function
 
 const express = require('express');
 const app = express();
@@ -20,7 +21,8 @@ app.get('', async (req, res) => {
                                     info: "Once you have an id, use the /api/info endpoint, and pass the id through the ?query= parameter",
                                     watch: "With the info endpoint, you can get the episode ids. These are in order from oldest (episode 1) to newest. Simply use /api/watch and add the ?query= parameter to fetch a link to watch the stream directly",
                                     download: "If you would rather download the episode, simply use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link",
-                                    tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\""
+                                    tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\"",
+                                    recent: "To get the most recent anime releases, use the /api/recent endpoint"
      });
 });
 
@@ -34,6 +36,18 @@ app.get('/api/popular', async (req, res) => {
         .catch((error) => {
             res.status(500).json({ error: 'Error occurred while searching popular' });
             console.error('Error occurred while searching:', error);
+        });
+});
+
+// Recent endpoint
+app.get('/api/recent', async (req, res) => {
+    await recent()
+        .then((results) => {
+            res.json(results);
+        })
+        .catch((error) => {
+            res.status(500).json({ error: 'Error occurred while fetching recent anime' });
+            console.error('Error occurred while fetching recent anime:', error);
         });
 });
 
