@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-async function recentAnime() {
+async function recent() {
     const url = `https://animeheaven.me/`; // URL of the homepage
     try {
         const response = await axios.get(url, {
@@ -36,4 +36,4 @@ async function recentAnime() {
     }
 }
 
-module.exports = recentAnime; // Export the function
+module.exports = recent; // Export the function
