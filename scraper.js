@@ -8,7 +8,7 @@ const recent = require("./endpoints/recent");  // Import the recent function
 
 const getChapterImages = require('./endpoints/chapterImages');
 
-const getEpisodeData = require('./getEpisodeData');
+const getEpisodeData = require('./endpoints/getEpisodeData');
 
 const express = require('express');
 const app = express();
