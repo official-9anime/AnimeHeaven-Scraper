@@ -8,6 +8,8 @@ const recent = require("./endpoints/recent");  // Import the recent function
 
 const getChapterImages = require('./endpoints/chapterImages');
 
+const getEpisodeData = require('./getEpisodeData');
+
 const express = require('express');
 const app = express();
 
@@ -61,6 +63,22 @@ app.get('/manga/:mangaTitle/chapter-:chapterNumber', async (req, res) => {
     const { mangaTitle, chapterNumber } = req.params;
 
     const chapterUrl = `https://www.mangaread.org/manga/${mangaTitle}/chapter-${chapterNumber}/`;
+
+    try {
+        const result = await getChapterImages(chapterUrl);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: 'Error occurred while fetching chapter images' });
+        console.error('Error:', error);
+    }
+});
+
+
+// Dynamic route for chapter images
+app.get('/manga/:mangaTitle', async (req, res) => {
+    const { mangaTitle } = req.params;
+
+    const chapterUrl = `https://www.mangaread.org/manga/${mangaTitle}`;
 
     try {
         const result = await getChapterImages(chapterUrl);
