@@ -6,6 +6,8 @@ const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
 const recent = require("./endpoints/recent");  // Import the recent function
 
+const getChapterImages = require('./endpoints/chapterImages');
+
 const express = require('express');
 const app = express();
 
@@ -50,6 +52,25 @@ app.get('/api/recent', async (req, res) => {
             console.error('Error occurred while fetching recent anime:', error);
         });
 });
+
+// Chapter Images endpoint
+app.get('/api/chapter-images', async (req, res) => {
+    const chapterUrl = req.query.url;
+
+    if (!chapterUrl) {
+        return res.status(400).json({ error: 'URL parameter is required' });
+    }
+
+    try {
+        const result = await getChapterImages(chapterUrl);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: 'Error occurred while fetching chapter images' });
+        console.error('Error:', error);
+    }
+});
+
+
 
 //Info endpoint
 app.get('/api/info', async (req, res) => {
