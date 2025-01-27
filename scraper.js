@@ -11,6 +11,7 @@ const getChapterImages = require('./endpoints/chapterImages');
 const express = require('express');
 const app = express();
 
+const cors = require('cors');
 // Enable CORS
 app.use(cors());
 //JJK
