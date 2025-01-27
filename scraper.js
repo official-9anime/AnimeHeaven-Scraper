@@ -81,7 +81,7 @@ app.get('/manga/:mangaTitle', async (req, res) => {
     const chapterUrl = `https://www.mangaread.org/manga/${mangaTitle}`;
 
     try {
-        const result = await getChapterImages(chapterUrl);
+        const result = await getChapterImages(pageUrl);
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: 'Error occurred while fetching chapter images' });
