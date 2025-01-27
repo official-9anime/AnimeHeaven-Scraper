@@ -11,6 +11,8 @@ const getChapterImages = require('./endpoints/chapterImages');
 const express = require('express');
 const app = express();
 
+// Enable CORS
+app.use(cors());
 //JJK
 //const query = 'ot32w';
 //Dandadan
