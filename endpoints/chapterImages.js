@@ -11,21 +11,21 @@ async function getChapterImages(chapterUrl) {
 
         const html = response.data;
         const $ = cheerio.load(html);
-        const images = [];
+        const results = [];
 
         $('.reading-content .page-break img').each((index, element) => {
             const imageUrl = $(element).attr('src')?.trim();
             if (imageUrl) {
-                images.push(imageUrl);
+                results.push(imageUrl);
             }
         });
 
-        return images.length > 0
-            ? { success: true, images }
-            : { success: false, message: 'No images found in the chapter.' };
+        return results.length > 0
+            ? { status: 200, results }
+            : { status: 404, message: 'No images found in the chapter.' };
     } catch (error) {
         console.error('Error fetching chapter images:', error);
-        return { success: false, message: 'An error occurred while fetching chapter images.' };
+        return { status: 500, message: 'An error occurred while fetching chapter images.' };
     }
 }
 
