@@ -74,17 +74,21 @@ app.get('/manga/:mangaTitle/chapter-:chapterNumber', async (req, res) => {
 });
 
 
-// Dynamic route for chapter images
 app.get('/manga/:mangaTitle', async (req, res) => {
     const { mangaTitle } = req.params;
 
-    const chapterUrl = `https://www.mangaread.org/manga/${mangaTitle}`;
+    // Construct the URL based on the manga title
+    const pageUrl = `https://www.mangaread.org/manga/${mangaTitle}`;
 
     try {
-        const result = await getChapterImages(pageUrl);
+        // Fetch the episode data
+        const result = await getEpisodeData(pageUrl);
+
+        // Send the result back to the client
         res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Error occurred while fetching chapter images' });
+        // Handle errors gracefully
+        res.status(500).json({ error: 'Error occurred while fetching episode data' });
         console.error('Error:', error);
     }
 });
