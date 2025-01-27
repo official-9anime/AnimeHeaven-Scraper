@@ -13,7 +13,6 @@ async function getChapterImages(chapterUrl) {
         const $ = cheerio.load(html);
         const images = [];
 
-        // Extract image URLs within the reading content section
         $('.reading-content .page-break img').each((index, element) => {
             const imageUrl = $(element).attr('src')?.trim();
             if (imageUrl) {
@@ -31,10 +30,3 @@ async function getChapterImages(chapterUrl) {
 }
 
 module.exports = getChapterImages;
-
-// Example usage
-(async () => {
-    const chapterUrl = 'https://www.mangaread.org/manga/fukushuu-no-taishi-level-9999-no-bakumatsu-isekai-tensei/chapter-19/';
-    const result = await getChapterImages(chapterUrl);
-    console.log(JSON.stringify(result, null, 2));
-})();
