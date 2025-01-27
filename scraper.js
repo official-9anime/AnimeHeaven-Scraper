@@ -53,13 +53,11 @@ app.get('/api/recent', async (req, res) => {
         });
 });
 
-// Chapter Images endpoint
-app.get('/api/chapter-images', async (req, res) => {
-    const chapterUrl = req.query.url;
+// Dynamic route for chapter images
+app.get('/manga/:mangaTitle/chapter-:chapterNumber', async (req, res) => {
+    const { mangaTitle, chapterNumber } = req.params;
 
-    if (!chapterUrl) {
-        return res.status(400).json({ error: 'URL parameter is required' });
-    }
+    const chapterUrl = `https://www.mangaread.org/manga/${mangaTitle}/chapter-${chapterNumber}/`;
 
     try {
         const result = await getChapterImages(chapterUrl);
