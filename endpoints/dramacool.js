@@ -25,7 +25,7 @@ async function scrapeDramacool() {
             const drama = {
                 name: $(element).find('.title').text().trim(),
                 episodeStatus: $(element).find('.type').text().trim(),
-                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                episodeNumber: ($(element).find('.ep').text().trim().replace(/^EP\s+/i, '') || 'N/A'),
                 link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
                 updatedTime: $(element).find('.time').text().trim(),
             };
@@ -40,7 +40,7 @@ async function scrapeDramacool() {
             const kshow = {
                 name: $(element).find('.title').text().trim(),
                 episodeStatus: $(element).find('.type').text().trim(),
-                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                episodeNumber: ($(element).find('.ep').text().trim().replace(/^EP\s+/i, '') || 'N/A'),
                 link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
                 updatedTime: $(element).find('.time').text().trim(),
             };
@@ -55,7 +55,7 @@ async function scrapeDramacool() {
             const movie = {
                 name: $(element).find('.title').text().trim(),
                 episodeStatus: $(element).find('.type').text().trim(),
-                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                episodeNumber: ($(element).find('.ep').text().trim().replace(/^EP\s+/i, '') || 'N/A'),
                 link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
                 updatedTime: $(element).find('.time').text().trim(),
                 image: $(element).find('img').attr('data-original') || $(element).find('img').attr('src'), // Extract poster image
