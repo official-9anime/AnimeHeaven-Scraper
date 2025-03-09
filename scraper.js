@@ -5,6 +5,7 @@ const watch = require("./endpoints/watch");
 const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
 const recent = require("./endpoints/recent");  // Import the recent function
+const dramacool = require("./endpoints/dramacool"); // Import the Dramacool module
 
 const getChapterImages = require('./endpoints/chapterImages');
 
@@ -29,7 +30,8 @@ app.get('', async (req, res) => {
                                     watch: "With the info endpoint, you can get the episode ids. These are in order from oldest (episode 1) to newest. Simply use /api/watch and add the ?query= parameter to fetch a link to watch the stream directly",
                                     download: "If you would rather download the episode, simply use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link",
                                     tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\"",
-                                    recent: "To get the most recent anime releases, use the /api/recent endpoint"
+                                    recent: "To get the most recent anime releases, use the /api/recent endpoint",
+                                    dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage."
      });
 });
 
@@ -183,6 +185,17 @@ app.get('/api/tags', async (req, res) => {
             res.status(500).json({ error: 'Error occurred while loading tags' });
             console.error('Error occurred while loading tags:', error);
         });
+});
+
+// Dramacool endpoint (No query required, scrapes homepage)
+app.get("/api/dramacool", async (req, res) => {
+    try {
+        const results = await dramacool();
+        res.json(results);
+    } catch (error) {
+        res.status(500).json({ error: "Error occurred while fetching drama data" });
+        console.error("Error:", error);
+    }
 });
 
 
