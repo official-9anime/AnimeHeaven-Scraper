@@ -15,37 +15,58 @@ async function scrapeDramacool() {
         const $ = cheerio.load(html);
         const dramas = [];
         const kshows = [];
+        const movies = [];
 
-        // Scrape dramas (Verify the class name)
-        $('.tab-content.left-tab-1.selected .switch-block.list-episode-item li').each((_, element) => {
-            const link = $(element).find('a.img').attr('href');
+        // Scrape Dramas
+        $('.tab-content.left-tab-1 .switch-block.list-episode-item li').each((_, element) => {
+            const link = $(element).find('a').attr('href');
+            if (!link) return;
+
             const drama = {
-                name: $(element).find('h2.title').text().trim(),
+                name: $(element).find('.title').text().trim(),
                 episodeStatus: $(element).find('.type').text().trim(),
-                episodeNumber: $(element).find('.ep').text().trim(),
-                link: link ? `https://dramacool.com.tr${link}` : null, // Fix relative URL
+                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
                 updatedTime: $(element).find('.time').text().trim(),
             };
             dramas.push(drama);
         });
 
-        // Scrape KShows (Verify the class name)
+        // Scrape KShows
         $('.tab-content.left-tab-3 .switch-block.list-episode-item li').each((_, element) => {
-            const link = $(element).find('a.img').attr('href');
+            const link = $(element).find('a').attr('href');
+            if (!link) return;
+
             const kshow = {
-                name: $(element).find('h2.title').text().trim(),
+                name: $(element).find('.title').text().trim(),
                 episodeStatus: $(element).find('.type').text().trim(),
-                episodeNumber: $(element).find('.ep').text().trim(),
-                link: link ? `https://dramacool.com.tr${link}` : null, // Fix relative URL
+                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
                 updatedTime: $(element).find('.time').text().trim(),
             };
             kshows.push(kshow);
         });
 
-        return { dramas, kshows };
+        // Scrape Movies
+        $('.tab-content.left-tab-2 .switch-block.list-episode-item li').each((_, element) => {
+            const link = $(element).find('a').attr('href');
+            if (!link) return;
+
+            const movie = {
+                name: $(element).find('.title').text().trim(),
+                episodeStatus: $(element).find('.type').text().trim(),
+                episodeNumber: $(element).find('.ep').text().trim() || 'N/A',
+                link: link.startsWith('http') ? link : `https://dramacool.com.tr${link}`,
+                updatedTime: $(element).find('.time').text().trim(),
+                image: $(element).find('img').attr('data-original') || $(element).find('img').attr('src'), // Extract poster image
+            };
+            movies.push(movie);
+        });
+
+        return { dramas, kshows, movies };
     } catch (error) {
-        console.error('Error fetching Dramacool:', error);
-        return { error: 'Failed to fetch data.' };
+        console.error('Error fetching Dramacool:', error.message);
+        return { error: 'Failed to fetch data.', details: error.message };
     }
 }
 
