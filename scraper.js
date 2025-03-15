@@ -6,6 +6,7 @@ const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
 const recent = require("./endpoints/recent");  // Import the recent function
 const dramacool = require("./endpoints/dramacool"); // Import the Dramacool module
+const asuraChapterNo = require('./endpoints/asuraChapterNo');  // Import the asuraChapterNo endpoint
 
 const getChapterImages = require('./endpoints/chapterImages');
 
@@ -33,6 +34,23 @@ app.get('', async (req, res) => {
                                     recent: "To get the most recent anime releases, use the /api/recent endpoint",
                                     dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage."
      });
+});
+
+// New endpoint for extracting chapters from a series
+app.get('/api/asuraChapterNo', async (req, res) => {
+    const query = req.query.query;
+
+    if (!query) {
+        return res.status(400).json({ error: 'Query parameter is required' });
+    }
+
+    try {
+        const chapterData = await asuraChapterNo(query); // Pass the series URL to get chapters
+        res.json(chapterData);
+    } catch (error) {
+        res.status(500).json({ error: 'Error occurred while fetching chapters' });
+        console.error('Error occurred while fetching chapters:', error);
+    }
 });
 
 //Popular endpoint
