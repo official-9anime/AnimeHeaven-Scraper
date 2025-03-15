@@ -38,7 +38,7 @@ app.get('', async (req, res) => {
 });
 
 // New endpoint for extracting chapters from a series
-app.get('/api/asuraChapterNo', async (req, res) => {
+app.get('/api/chapters', async (req, res) => {
     const query = req.query.query;
 
     if (!query) {
@@ -46,7 +46,7 @@ app.get('/api/asuraChapterNo', async (req, res) => {
     }
 
     try {
-        const chapterData = await asuraChapterNo(query); // Pass the series URL to get chapters
+        const chapterData = await getChapters(query); // Pass the series URL to get chapters
         res.json(chapterData);
     } catch (error) {
         res.status(500).json({ error: 'Error occurred while fetching chapters' });
