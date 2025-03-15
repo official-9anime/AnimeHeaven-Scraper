@@ -33,7 +33,7 @@ app.get('', async (req, res) => {
                                     tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\"",
                                     recent: "To get the most recent anime releases, use the /api/recent endpoint",
                                     dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage.",
-                                    chapters: "To get the chapters for a series, use the /api/chapters endpoint and add the ?query= parameter with the series URL"
+                                    
      });
 });
 
