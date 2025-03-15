@@ -32,7 +32,8 @@ app.get('', async (req, res) => {
                                     download: "If you would rather download the episode, simply use the /api/download endpoint, and pass the episode ID to the ?query= parameter. This will return a Direct Download Link",
                                     tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\"",
                                     recent: "To get the most recent anime releases, use the /api/recent endpoint",
-                                    dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage."
+                                    dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage.",
+                                    asuraChapterNo: "Asura Scans Endpoint for chapter number fetching"
      });
 });
 
