@@ -6,7 +6,7 @@ const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
 const recent = require("./endpoints/recent");  // Import the recent function
 const dramacool = require("./endpoints/dramacool"); // Import the Dramacool module
-const asuraChapterNo = require('./endpoints/asuraChapterNo');  // Import the asuraChapterNo endpoint
+const getChapters = require('./endpoints/getChapters');  // Import the new endpoint
 
 const getChapterImages = require('./endpoints/chapterImages');
 
@@ -33,7 +33,7 @@ app.get('', async (req, res) => {
                                     tags: "If you'd like to search by a tag, simply go to /api/tags and add the ?query= parameter with the name of the tag EXACTLY as how its provided in the info, for example you'd use \"Based On A Manga\"",
                                     recent: "To get the most recent anime releases, use the /api/recent endpoint",
                                     dramacool: "Use /api/dramacool to fetch the latest dramas from the homepage.",
-                                    asuraChapterNo: "Asura Scans Endpoint for chapter number fetching"
+                                    chapters: "To get the chapters for a series, use the /api/chapters endpoint and add the ?query= parameter with the series URL"
      });
 });
 
