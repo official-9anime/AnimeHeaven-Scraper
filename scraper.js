@@ -6,7 +6,7 @@ const download = require("./endpoints/download");
 const tags = require("./endpoints/tags");
 const recent = require("./endpoints/recent");  // Import the recent function
 const dramacool = require("./endpoints/dramacool"); // Import the Dramacool module
-const getChapters = require('./endpoints/getChapters'); 
+
 
 const getChapterImages = require('./endpoints/chapterImages');
 
